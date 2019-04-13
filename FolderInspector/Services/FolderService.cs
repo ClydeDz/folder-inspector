@@ -3,7 +3,6 @@
  * Project: Folder Inspector
  * Twitter: @ClydeDz
  * GitHub: @ClydeDz
- * Email: clydedsouza[at]outlook[dot]com
  */
 
 using System;

@@ -2,8 +2,7 @@
  * Author: Clyde D'Souza
  * Project: Folder Inspector
  * Twitter: @ClydeDz
- * GitHub: @ClydeDz
- * Email: clydedsouza[at]outlook[dot]com
+ * GitHub: @ClydeDz 
  */
 
 using System;
