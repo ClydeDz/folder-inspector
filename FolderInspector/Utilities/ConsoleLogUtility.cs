@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Author:  Clyde D'Souza
+ * Project: Folder Inspector
+ * Twitter: @ClydeDz
+ * GitHub:  @ClydeDz 
+ */
+ 
+ using System;
 
 namespace FolderInspector.Utilities
 {

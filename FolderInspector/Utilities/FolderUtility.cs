@@ -1,8 +1,8 @@
 ﻿/*
- * Author: Clyde D'Souza
+ * Author:  Clyde D'Souza
  * Project: Folder Inspector
  * Twitter: @ClydeDz
- * GitHub: @ClydeDz
+ * GitHub:  @ClydeDz
  */
 
 using System;
