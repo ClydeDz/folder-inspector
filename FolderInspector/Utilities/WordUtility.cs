@@ -7,12 +7,12 @@
 
 using Novacode;
 
-namespace FolderInspector.Services
+namespace FolderInspector.Utilities
 {
     /// <summary>
     /// Contains methods to edit a Word file
     /// </summary>
-    public class WordService
+    public class WordUtility
     {
         /// <summary>
         /// Edits the header and footer of the Word file at the specified path
@@ -26,11 +26,11 @@ namespace FolderInspector.Services
             
             Header header_default = document.Headers.odd;
             Paragraph p1 = header_default.InsertParagraph();
-            p1.InsertText(FolderService.GetHeaderText(filePath));
+            p1.InsertText(FolderUtility.GetHeaderText(filePath));
 
             Footer footer_default = document.Footers.odd;
             Paragraph p3 = footer_default.InsertParagraph();
-            p3.InsertText(FolderService.GetFooterText(filePath));
+            p3.InsertText(FolderUtility.GetFooterText(filePath));
             
             document.Save();
         }

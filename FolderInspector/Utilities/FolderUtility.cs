@@ -9,12 +9,12 @@ using System;
 using System.IO;
 using FolderInspector.Constants;
 
-namespace FolderInspector.Services
+namespace FolderInspector.Utilities
 {
     /// <summary>
     /// Contains the logic behind manipulating files and folders 
     /// </summary>
-    public class FolderService
+    public class FolderUtility
     {
         /// <summary>
         /// Process all files in the directory passed in, recurse on any directories 
@@ -49,7 +49,7 @@ namespace FolderInspector.Services
                 if (path.Split('.')[1] == AppSettings.WordDocumentExtension)
                 {
                     Console.WriteLine("Word document found: {0}", path.Split('.')[0]);
-                    WordService.EditWordHeaderFooter(path);
+                    WordUtility.EditWordHeaderFooter(path);
                 }
             }
             if (AppSettings.EditExcelDocuments)
@@ -57,7 +57,7 @@ namespace FolderInspector.Services
                 if (path.Split('.')[1] == AppSettings.ExcelDocumentExtension)
                 {
                     Console.WriteLine("Excel document found: {0}", path.Split('.')[0]);
-                    ExcelService.EditExcelHeaderFooter(path);
+                    ExcelUtility.EditExcelHeaderFooter(path);
                 }
             }       
 

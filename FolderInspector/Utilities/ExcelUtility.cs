@@ -7,12 +7,12 @@
 
 using ClosedXML.Excel;
 
-namespace FolderInspector.Services
+namespace FolderInspector.Utilities
 {
     /// <summary>
     /// Contains methods to edit an Excel file
     /// </summary>
-    public class ExcelService
+    public class ExcelUtility
     {
         /// <summary>
         /// Edits the header and footer of the Excel file at the specified path.
@@ -23,8 +23,8 @@ namespace FolderInspector.Services
             var workbook = new XLWorkbook(filePath);
             var worksheet = workbook.Worksheets.Worksheet(1);
 
-            worksheet.PageSetup.Header.Left.AddText(FolderService.GetHeaderText(filePath));
-            worksheet.PageSetup.Footer.Left.AddText(FolderService.GetFooterText(filePath));
+            worksheet.PageSetup.Header.Left.AddText(FolderUtility.GetHeaderText(filePath));
+            worksheet.PageSetup.Footer.Left.AddText(FolderUtility.GetFooterText(filePath));
 
             workbook.SaveAs(filePath);
         }

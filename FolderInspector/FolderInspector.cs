@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 using FolderInspector.Constants;
-using FolderInspector.Services;
+using FolderInspector.Utilities;
 
 namespace FolderInspector
 {
@@ -25,11 +25,11 @@ namespace FolderInspector
                 string path = @"" + AppSettings.RootFileDirectory;
                 if (File.Exists(path))
                 {
-                    FolderService.ProcessFile(path);
+                    FolderUtility.ProcessFile(path);
                 }
                 else if (Directory.Exists(path))
                 {
-                    FolderService.ProcessDirectory(path);
+                    FolderUtility.ProcessDirectory(path);
                 }
                 else
                 {
