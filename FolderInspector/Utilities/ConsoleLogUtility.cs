@@ -6,6 +6,7 @@
  */
  
  using System;
+using System.Reflection;
 
 namespace FolderInspector.Utilities
 {
@@ -17,7 +18,7 @@ namespace FolderInspector.Utilities
         /// <param name="message">Message to be printed.</param>
         internal static void WriteLog(string message)
         {
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             Console.WriteLine(message);
         }
 
@@ -29,6 +30,13 @@ namespace FolderInspector.Utilities
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
-        }        
+        }      
+        
+        internal static void PrintHeader()
+        {
+            WriteLog($"Folder Inspector ({IntPtr.Size * 8}-bit .NET {Environment.Version})");
+            WriteLog($"Version {Assembly.GetEntryAssembly().GetName().Version}");
+            WriteLog("Copyright (C) 2019 Clyde D'Souza (https://clydedsouza.net).\n");
+        }
     }
 }

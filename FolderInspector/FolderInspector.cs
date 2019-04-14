@@ -21,7 +21,8 @@ namespace FolderInspector
         {
             try
             {
-                ConsoleLogUtility.WriteLog("Program started");
+                ConsoleLogUtility.PrintHeader();
+
                 string path = @"" + AppSettings.RootFileDirectory;
                 if (File.Exists(path))
                 {
