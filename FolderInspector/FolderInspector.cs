@@ -1,8 +1,8 @@
 ﻿/*
- * Author: Clyde D'Souza
+ * Author:  Clyde D'Souza
  * Project: Folder Inspector
  * Twitter: @ClydeDz
- * GitHub: @ClydeDz 
+ * GitHub:  @ClydeDz 
  */
 
 using System;
@@ -15,9 +15,9 @@ namespace FolderInspector
     /// <summary>
     /// Starting point of the application
     /// </summary>
-    public class Program
+    public class FolderInspector
     {
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             try
             {

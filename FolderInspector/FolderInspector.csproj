@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\AppSettings.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="FolderInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ExcelService.cs" />
     <Compile Include="Services\FolderService.cs" />
