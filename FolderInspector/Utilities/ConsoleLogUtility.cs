@@ -8,7 +8,7 @@ namespace FolderInspector.Utilities
         /// Prints a standard message on the console output.
         /// </summary>
         /// <param name="message">Message to be printed.</param>
-        internal void WriteLog(string message)
+        internal static void WriteLog(string message)
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(message);
@@ -18,7 +18,7 @@ namespace FolderInspector.Utilities
         /// Prints an error message on the console output.
         /// </summary>
         /// <param name="message">Message to be printed.</param>
-        internal void WriteError(string message)
+        internal static void WriteError(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);

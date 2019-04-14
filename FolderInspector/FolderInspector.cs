@@ -21,7 +21,7 @@ namespace FolderInspector
         {
             try
             {
-                Console.WriteLine("Program started");
+                ConsoleLogUtility.WriteLog("Program started");
                 string path = @"" + AppSettings.RootFileDirectory;
                 if (File.Exists(path))
                 {
@@ -33,14 +33,14 @@ namespace FolderInspector
                 }
                 else
                 {
-                    Console.WriteLine("{0} is not a valid file or directory.", path);
+                    ConsoleLogUtility.WriteError($"{path} is not a valid file or directory.");
                 }
-                Console.WriteLine("Program ended");
+                ConsoleLogUtility.WriteLog("Program ended");
                 Console.Read();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Folder Inspection encountered an exception. Here are the details: {0}", ex.Message);
+                ConsoleLogUtility.WriteError($"Folder Inspection encountered an exception. Here are the details: {ex.Message}");
                 throw;
             }
         }  

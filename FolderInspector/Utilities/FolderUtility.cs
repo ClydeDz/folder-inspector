@@ -43,12 +43,12 @@ namespace FolderInspector.Utilities
         /// <param name="path"></param>
         public static void ProcessFile(string path)
         {
-            Console.WriteLine("Processing file '{0}'.", path);
+            ConsoleLogUtility.WriteLog($"Processing file {path}.");
             if (AppSettings.EditWordDocuments)
             {
                 if (path.Split('.')[1] == AppSettings.WordDocumentExtension)
                 {
-                    Console.WriteLine("Word document found: {0}", path.Split('.')[0]);
+                    ConsoleLogUtility.WriteLog($"Word document found: {path.Split('.')[0]}");
                     WordUtility.EditWordHeaderFooter(path);
                 }
             }
@@ -56,7 +56,7 @@ namespace FolderInspector.Utilities
             {
                 if (path.Split('.')[1] == AppSettings.ExcelDocumentExtension)
                 {
-                    Console.WriteLine("Excel document found: {0}", path.Split('.')[0]);
+                    ConsoleLogUtility.WriteLog($"Excel document found: {path.Split('.')[0]}");
                     ExcelUtility.EditExcelHeaderFooter(path);
                 }
             }       
