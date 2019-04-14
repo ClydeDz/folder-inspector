@@ -36,14 +36,17 @@ namespace FolderInspector
                     ConsoleLogUtility.WriteError($"{path} is not a valid file or directory.");
                 }
                 ConsoleLogUtility.WriteLog("Program ended");
+
+#if DEBUG
                 Console.Read();
+#endif
             }
             catch (Exception ex)
             {
                 ConsoleLogUtility.WriteError($"Folder Inspection encountered an exception. Here are the details: {ex.Message}");
                 throw;
             }
-        }  
+        }
     }
 }
 
