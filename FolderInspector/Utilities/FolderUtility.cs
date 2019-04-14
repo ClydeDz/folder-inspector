@@ -14,14 +14,14 @@ namespace FolderInspector.Utilities
     /// <summary>
     /// Contains the logic behind manipulating files and folders 
     /// </summary>
-    public class FolderUtility
+    internal class FolderUtility
     {
         /// <summary>
         /// Process all files in the directory passed in, recurse on any directories 
         /// that are found, and process the files they contain.
         /// </summary>
         /// <param name="targetDirectory">Complete directory path</param>
-        public static void ProcessDirectory(string targetDirectory)
+        internal static void ProcessDirectory(string targetDirectory)
         {
             // Process the list of files found in the directory.
             string[] fileEntries = Directory.GetFiles(targetDirectory);
@@ -41,7 +41,7 @@ namespace FolderInspector.Utilities
         /// Contains the logic behind processing a given file
         /// </summary>
         /// <param name="path"></param>
-        public static void ProcessFile(string path)
+        internal static void ProcessFile(string path)
         {
             ConsoleLogUtility.WriteLog($"Processing file {path}.");
             if (AppSettings.EditWordDocuments)
@@ -68,7 +68,7 @@ namespace FolderInspector.Utilities
         /// </summary>
         /// <param name="filePath">Optionally, takes in the file path to append to the header text</param>
         /// <returns>Returns the header text content</returns>
-        public static string GetHeaderText(string filePath = "")
+        internal static string GetHeaderText(string filePath = "")
         {
             if(AppSettings.UseCustomHeaderText && !string.IsNullOrEmpty(AppSettings.CustomHeaderText))
             {
@@ -82,7 +82,7 @@ namespace FolderInspector.Utilities
         /// </summary>
         /// <param name="filePath">Optionally, takes in the file path to append to the footer text</param>
         /// <returns>Return the footer text content</returns>
-        public static string GetFooterText(string filePath = "")
+        internal static string GetFooterText(string filePath = "")
         {
             if (AppSettings.UseCustomHeaderText && !string.IsNullOrEmpty(AppSettings.CustomFooterText))
             {

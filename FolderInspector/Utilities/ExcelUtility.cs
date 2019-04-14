@@ -12,13 +12,13 @@ namespace FolderInspector.Utilities
     /// <summary>
     /// Contains methods to edit an Excel file
     /// </summary>
-    public class ExcelUtility
+    internal class ExcelUtility
     {
         /// <summary>
         /// Edits the header and footer of the Excel file at the specified path.
         /// </summary>
         /// <param name="filePath">Complete file path</param>
-        public static void EditExcelHeaderFooter(string filePath)
+        internal static void EditExcelHeaderFooter(string filePath)
         {
             var workbook = new XLWorkbook(filePath);
             var worksheet = workbook.Worksheets.Worksheet(1);

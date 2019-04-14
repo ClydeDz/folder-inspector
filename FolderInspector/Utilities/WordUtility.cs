@@ -12,13 +12,13 @@ namespace FolderInspector.Utilities
     /// <summary>
     /// Contains methods to edit a Word file
     /// </summary>
-    public class WordUtility
+    internal class WordUtility
     {
         /// <summary>
         /// Edits the header and footer of the Word file at the specified path
         /// </summary>
         /// <param name="filePath">Complete file path</param>
-        public static void EditWordHeaderFooter(string filePath)
+        internal static void EditWordHeaderFooter(string filePath)
         {
             DocX document = DocX.Load(filePath);            
             document.AddHeaders();

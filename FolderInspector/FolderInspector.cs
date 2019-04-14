@@ -15,7 +15,7 @@ namespace FolderInspector
     /// <summary>
     /// Starting point of the application
     /// </summary>
-    public class FolderInspector
+    internal class FolderInspector
     {
         internal static void Main(string[] args)
         {

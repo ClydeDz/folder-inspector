@@ -13,14 +13,14 @@ namespace FolderInspector.Constants
     /// <summary>
     /// Contains the application wide settings
     /// </summary>
-    public class AppSettings
+    internal class AppSettings
     {
         // Basic Settings
 
         /// <summary>
         /// Sets the root directory that you want to inspect
         /// </summary>
-        public static string RootFileDirectory
+        internal static string RootFileDirectory
         {
             get { return ConfigurationManager.AppSettings["RootFileDirectory"].ToString(); }
         }
@@ -28,7 +28,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets the default header text to be used if custom text isn't specified
         /// </summary>
-        public static string DefaultHeaderText
+        internal static string DefaultHeaderText
         {
             get { return ConfigurationManager.AppSettings["DefaultHeaderText"].ToString(); }
         }
@@ -36,7 +36,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets the default footer text to be used if custom text isn't specified
         /// </summary>
-        public static string DefaultFooterText
+        internal static string DefaultFooterText
         {
             get { return ConfigurationManager.AppSettings["DefaultFooterText"].ToString(); }
         }
@@ -44,7 +44,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets whether or not to inspect subdirectories of the root directory
         /// </summary>
-        public static bool SearchSubDirectories
+        internal static bool SearchSubDirectories
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["SearchSubDirectories"].ToString()); }
         }
@@ -52,7 +52,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets whether or not to edit Word documents found in the directory
         /// </summary>
-        public static bool EditWordDocuments
+        internal static bool EditWordDocuments
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["EditWordDocuments"].ToString()); }
         }
@@ -60,7 +60,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets whether or not to edit Excel documents found in the directory
         /// </summary>
-        public static bool EditExcelDocuments
+        internal static bool EditExcelDocuments
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["EditExcelDocuments"].ToString()); }
         }
@@ -68,7 +68,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets the file extension for a Word document to match it against
         /// </summary>
-        public static string WordDocumentExtension
+        internal static string WordDocumentExtension
         {
             get { return ConfigurationManager.AppSettings["WordDocumentExtension"].ToString(); }
         }
@@ -76,7 +76,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets the file extension for an Excel document to match it against
         /// </summary>
-        public static string ExcelDocumentExtension
+        internal static string ExcelDocumentExtension
         {
             get { return ConfigurationManager.AppSettings["ExcelDocumentExtension"].ToString(); }
         }
@@ -86,7 +86,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets whether or not to use custom header text
         /// </summary>
-        public static bool UseCustomHeaderText
+        internal static bool UseCustomHeaderText
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["UseCustomHeaderText"].ToString()); }
         }
@@ -94,7 +94,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets the custom header text
         /// </summary>
-        public static string CustomHeaderText
+        internal static string CustomHeaderText
         {
             get { return ConfigurationManager.AppSettings["CustomHeaderText"].ToString(); }
         }
@@ -102,7 +102,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets whether or not to use custom footer text 
         /// </summary>
-        public static bool UseCustomFooterText
+        internal static bool UseCustomFooterText
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["UseCustomFooterText"].ToString()); }
         }
@@ -110,7 +110,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets the custom footer text
         /// </summary>
-        public static string CustomFooterText
+        internal static string CustomFooterText
         {
             get { return ConfigurationManager.AppSettings["CustomFooterText"].ToString(); }
         }
@@ -118,7 +118,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets whether or not to append the file path to the header text
         /// </summary>
-        public static bool AppendFilePathToHeaderText
+        internal static bool AppendFilePathToHeaderText
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["AppendFilePathToHeaderText"].ToString()); }
         }
@@ -126,7 +126,7 @@ namespace FolderInspector.Constants
         /// <summary>
         /// Sets whether or not to append the file path to the footer text
         /// </summary>
-        public static bool AppendFilePathToFooterText
+        internal static bool AppendFilePathToFooterText
         {
             get { return Convert.ToBoolean(ConfigurationManager.AppSettings["AppendFilePathToFooterText"].ToString()); }
         }
