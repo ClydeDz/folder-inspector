@@ -10,125 +10,135 @@ using System.Configuration;
 
 namespace FolderInspector.Constants
 {
+    public interface IAppSettings
+    {
+        string RootFileDirectory { get; set; }
+        string DefaultHeaderText { get; set; }
+        string DefaultFooterText { get; set; }
+        bool SearchSubDirectories { get; set; }
+        bool EditWordDocuments { get; set; }
+        bool EditExcelDocuments { get; set; }
+        string WordDocumentExtension { get; set; }
+        string ExcelDocumentExtension { get; set; }
+        bool UseCustomHeaderText { get; set; }
+        string CustomHeaderText { get; set; }
+        bool UseCustomFooterText { get; set; }
+        string CustomFooterText { get; set; }
+        bool AppendFilePathToHeaderText { get; set; }
+        bool AppendFilePathToFooterText { get; set; }
+    }
+
     /// <summary>
     /// Contains the application wide settings
     /// </summary>
-    internal class AppSettings
+    public class AppSettings: IAppSettings
     {
-        // Basic Settings
+
+        public AppSettings(string rootFileDirectory, string defaultHeaderText, string defaultFooterText, bool searchSubDirectories, bool editWordDocuments, bool editExcelDocuments, string wordDocumentExtension, string excelDocumentExtension, bool useCustomHeaderText, string customHeaderText, bool useCustomFooterText, string customFooterText, bool appendFilePathToHeaderText, bool appendFilePathToFooterText)
+        {
+            RootFileDirectory = rootFileDirectory;
+            DefaultHeaderText = defaultHeaderText;
+            DefaultFooterText = defaultFooterText;
+            SearchSubDirectories = searchSubDirectories;
+            EditWordDocuments = editWordDocuments;
+            EditExcelDocuments = editExcelDocuments;
+            WordDocumentExtension = wordDocumentExtension;
+            ExcelDocumentExtension = excelDocumentExtension;
+            UseCustomHeaderText = useCustomHeaderText;
+            CustomHeaderText = customHeaderText;
+            UseCustomFooterText = useCustomFooterText;
+            CustomFooterText = customFooterText;
+            AppendFilePathToHeaderText = appendFilePathToHeaderText;
+            AppendFilePathToFooterText = appendFilePathToFooterText;
+        }
+
+        public AppSettings(Configuration configuration)
+        {
+            RootFileDirectory = configuration.AppSettings.Settings["RootFileDirectory"].Value;
+            DefaultHeaderText = configuration.AppSettings.Settings["DefaultHeaderText"].Value;
+            DefaultFooterText = configuration.AppSettings.Settings["DefaultFooterText"].Value;
+            SearchSubDirectories = Convert.ToBoolean(configuration.AppSettings.Settings["SearchSubDirectories"].Value);
+            EditWordDocuments = Convert.ToBoolean(configuration.AppSettings.Settings["EditWordDocuments"].Value);
+            EditExcelDocuments = Convert.ToBoolean(configuration.AppSettings.Settings["EditExcelDocuments"].Value);
+            WordDocumentExtension = configuration.AppSettings.Settings["WordDocumentExtension"].Value;
+            ExcelDocumentExtension = configuration.AppSettings.Settings["ExcelDocumentExtension"].Value;
+            UseCustomHeaderText = Convert.ToBoolean(configuration.AppSettings.Settings["UseCustomHeaderText"].Value);
+            CustomHeaderText = configuration.AppSettings.Settings["CustomHeaderText"].Value;
+            UseCustomFooterText = Convert.ToBoolean(configuration.AppSettings.Settings["UseCustomFooterText"].Value);
+            CustomFooterText = configuration.AppSettings.Settings["CustomFooterText"].Value;
+            AppendFilePathToHeaderText = Convert.ToBoolean(configuration.AppSettings.Settings["AppendFilePathToHeaderText"].Value);
+            AppendFilePathToFooterText = Convert.ToBoolean(configuration.AppSettings.Settings["AppendFilePathToFooterText"].Value);
+        }
 
         /// <summary>
         /// Sets the root directory that you want to inspect
         /// </summary>
-        internal static string RootFileDirectory
-        {
-            get { return ConfigurationManager.AppSettings["RootFileDirectory"].ToString(); }
-        }
+        public string RootFileDirectory { get; set; }
 
         /// <summary>
         /// Sets the default header text to be used if custom text isn't specified
         /// </summary>
-        internal static string DefaultHeaderText
-        {
-            get { return ConfigurationManager.AppSettings["DefaultHeaderText"].ToString(); }
-        }
+        public string DefaultHeaderText { get; set; }
 
         /// <summary>
         /// Sets the default footer text to be used if custom text isn't specified
         /// </summary>
-        internal static string DefaultFooterText
-        {
-            get { return ConfigurationManager.AppSettings["DefaultFooterText"].ToString(); }
-        }
+        public string DefaultFooterText { get; set; }
 
         /// <summary>
         /// Sets whether or not to inspect subdirectories of the root directory
         /// </summary>
-        internal static bool SearchSubDirectories
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["SearchSubDirectories"].ToString()); }
-        }
+        public bool SearchSubDirectories { get; set; }
 
         /// <summary>
         /// Sets whether or not to edit Word documents found in the directory
         /// </summary>
-        internal static bool EditWordDocuments
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["EditWordDocuments"].ToString()); }
-        }
+        public bool EditWordDocuments { get; set; }
 
         /// <summary>
         /// Sets whether or not to edit Excel documents found in the directory
         /// </summary>
-        internal static bool EditExcelDocuments
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["EditExcelDocuments"].ToString()); }
-        }
+        public bool EditExcelDocuments { get; set; }
 
         /// <summary>
         /// Sets the file extension for a Word document to match it against
         /// </summary>
-        internal static string WordDocumentExtension
-        {
-            get { return ConfigurationManager.AppSettings["WordDocumentExtension"].ToString(); }
-        }
+        public string WordDocumentExtension { get; set; }
 
         /// <summary>
         /// Sets the file extension for an Excel document to match it against
         /// </summary>
-        internal static string ExcelDocumentExtension
-        {
-            get { return ConfigurationManager.AppSettings["ExcelDocumentExtension"].ToString(); }
-        }
+        public string ExcelDocumentExtension { get; set; }
 
-        // Advance settings
-      
         /// <summary>
         /// Sets whether or not to use custom header text
         /// </summary>
-        internal static bool UseCustomHeaderText
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["UseCustomHeaderText"].ToString()); }
-        }
+        public bool UseCustomHeaderText { get; set; }
 
         /// <summary>
         /// Sets the custom header text
         /// </summary>
-        internal static string CustomHeaderText
-        {
-            get { return ConfigurationManager.AppSettings["CustomHeaderText"].ToString(); }
-        }
+        public string CustomHeaderText { get; set; }
 
         /// <summary>
         /// Sets whether or not to use custom footer text 
         /// </summary>
-        internal static bool UseCustomFooterText
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["UseCustomFooterText"].ToString()); }
-        }
+        public bool UseCustomFooterText { get; set; }
 
         /// <summary>
         /// Sets the custom footer text
         /// </summary>
-        internal static string CustomFooterText
-        {
-            get { return ConfigurationManager.AppSettings["CustomFooterText"].ToString(); }
-        }
+        public string CustomFooterText { get; set; }
 
         /// <summary>
         /// Sets whether or not to append the file path to the header text
         /// </summary>
-        internal static bool AppendFilePathToHeaderText
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["AppendFilePathToHeaderText"].ToString()); }
-        }
+        public bool AppendFilePathToHeaderText { get; set; }
 
         /// <summary>
         /// Sets whether or not to append the file path to the footer text
         /// </summary>
-        internal static bool AppendFilePathToFooterText
-        {
-            get { return Convert.ToBoolean(ConfigurationManager.AppSettings["AppendFilePathToFooterText"].ToString()); }
-        }
+        public bool AppendFilePathToFooterText { get; set; }
+
     }
 }
