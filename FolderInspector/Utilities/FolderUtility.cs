@@ -14,7 +14,7 @@ namespace FolderInspector.Utilities
     /// <summary>
     /// Contains the logic behind manipulating files and folders 
     /// </summary>
-    internal class FolderUtility: IFolderUtility
+    public class FolderUtility: IFolderUtility
     {
         //private IDocumentUtility _wordDocumentUtility;
         //private IDocumentUtility _excelDocumentUtility;
@@ -36,11 +36,13 @@ namespace FolderInspector.Utilities
         /// <returns>Returns the header text content</returns>
         public string GetHeaderText(string filePath = "")
         {
-            if(_appSettings.UseCustomHeaderText && !string.IsNullOrEmpty(_appSettings.CustomHeaderText))
-            {
-                return _appSettings.CustomHeaderText + " " + (_appSettings.AppendFilePathToHeaderText ? filePath : "");
+            var headerText = _appSettings.AppendFilePathToHeaderText ? $" {filePath}" : "";
+            bool useCustomHeaderText = _appSettings.UseCustomHeaderText && !string.IsNullOrEmpty(_appSettings.CustomHeaderText);
+            if (useCustomHeaderText)
+            { 
+                return $"{_appSettings.CustomHeaderText}{headerText}";
             }
-            return _appSettings.DefaultHeaderText + " " + (_appSettings.AppendFilePathToHeaderText ? filePath : "");
+            return $"{_appSettings.DefaultHeaderText}{headerText}"; 
         }
 
         /// <summary>
@@ -50,13 +52,38 @@ namespace FolderInspector.Utilities
         /// <returns>Return the footer text content</returns>
         public string GetFooterText(string filePath = "")
         {
-            if (_appSettings.UseCustomHeaderText && !string.IsNullOrEmpty(_appSettings.CustomFooterText))
+            var footerText = _appSettings.AppendFilePathToFooterText ? $" {filePath}" : "";
+            bool useCustomFooterText = _appSettings.UseCustomFooterText && !string.IsNullOrEmpty(_appSettings.CustomFooterText);
+            if (useCustomFooterText)
             {
-                return _appSettings.CustomFooterText + " " + (_appSettings.AppendFilePathToFooterText ? filePath: "");
+                return $"{_appSettings.CustomFooterText}{footerText}";
             }
-            return _appSettings.DefaultFooterText + " " + (_appSettings.AppendFilePathToFooterText ? filePath : "");
+            return $"{_appSettings.DefaultFooterText}{footerText}";
         }
 
+        public bool IsWordFile(string filePath)
+        {
+            if (!filePath.Contains("."))
+            {
+                return false;
+            }
+            return filePath.Split('.')[1] == _appSettings.WordDocumentExtension;
+        }
+
+        public bool IsExcelFile(string filePath)
+        {
+            if (!filePath.Contains("."))
+            {
+                return false;
+            }
+            return filePath.Split('.')[1] == _appSettings.ExcelDocumentExtension;
+        }
+
+        public string GetFileName(string filePath)
+        {
+            var parts = filePath.Split('\\');
+            return parts[parts.Length-1];
+        }
 
         public void PrintHeader()
         {

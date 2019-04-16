@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FolderInspector.Utilities
 {
-    interface IAppSettingsUtility
+    public interface IAppSettingsUtility
     {
         string RootFileDirectory { get; set; }
         string DefaultHeaderText { get; set; }

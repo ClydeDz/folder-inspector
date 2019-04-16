@@ -10,6 +10,9 @@ namespace FolderInspector.Utilities
     {
         string GetHeaderText(string path = "");
         string GetFooterText(string path = "");
+        bool IsWordFile(string filePath);
+        bool IsExcelFile(string filePath);
+        string GetFileName(string filePath);
         void PrintHeader();
     }
 }

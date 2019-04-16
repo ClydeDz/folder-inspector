@@ -63,17 +63,17 @@ namespace FolderInspector
             _logUtility.WriteLog($"Processing file {path}.");
             if (_appSettings.EditWordDocuments)
             {
-                if (path.Split('.')[1] == _appSettings.WordDocumentExtension)
+                if (_folderUtility.IsWordFile(path))
                 {
-                    _logUtility.WriteLog($"Word document found: {path.Split('.')[0]}");
+                    _logUtility.WriteLog($"Word document found: {_folderUtility.GetFileName(path)}");
                     _wordDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
                 }
             }
             if (_appSettings.EditExcelDocuments)
             {
-                if (path.Split('.')[1] == _appSettings.ExcelDocumentExtension)
+                if (_folderUtility.IsExcelFile(path))
                 {
-                    _logUtility.WriteLog($"Excel document found: {path.Split('.')[0]}");
+                    _logUtility.WriteLog($"Excel document found: {_folderUtility.GetFileName(path)}");
                     _excelDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
                 }
             }

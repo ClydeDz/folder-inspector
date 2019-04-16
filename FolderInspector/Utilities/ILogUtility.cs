@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FolderInspector.Utilities
 {
-    interface ILogUtility
+    public interface ILogUtility
     {
         void WriteLog(string message);
         void WriteError(string message);
