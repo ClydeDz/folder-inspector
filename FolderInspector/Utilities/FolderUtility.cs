@@ -5,73 +5,28 @@
  * GitHub:  @ClydeDz
  */
 
+using System;
 using System.IO;
+using System.Reflection;
 
 namespace FolderInspector.Utilities
 {
     /// <summary>
     /// Contains the logic behind manipulating files and folders 
     /// </summary>
-    internal class FolderUtility
+    internal class FolderUtility: IFolderUtility
     {
-        private IDocumentUtility _wordDocumentUtility;
-        private IDocumentUtility _excelDocumentUtility;
+        //private IDocumentUtility _wordDocumentUtility;
+        //private IDocumentUtility _excelDocumentUtility;
         private IAppSettingsUtility _appSettings;
         private ILogUtility _logUtility;
 
-        public FolderUtility(IDocumentUtility wordDocumentUtility, IDocumentUtility excelDocumentUtility, IAppSettingsUtility appSettings, ILogUtility logUtility)
+        public FolderUtility(IAppSettingsUtility appSettings, ILogUtility logUtility)
         {
-            _wordDocumentUtility = wordDocumentUtility;
-            _excelDocumentUtility = excelDocumentUtility;
+            //_wordDocumentUtility = wordDocumentUtility;
+            //_excelDocumentUtility = excelDocumentUtility;
             _appSettings = appSettings;
             _logUtility = logUtility;
-        }
-         
-        /// <summary>
-        /// Process all files in the directory passed in, recurse on any directories 
-        /// that are found, and process the files they contain.
-        /// </summary>
-        /// <param name="targetDirectory">Complete directory path</param>
-        internal void ProcessDirectory(string targetDirectory)
-        {
-            // Process the list of files found in the directory.
-            string[] fileEntries = Directory.GetFiles(targetDirectory);
-            foreach (string fileName in fileEntries)
-                ProcessFile(fileName);
-
-            if (_appSettings.SearchSubDirectories)
-            {
-                // Recurse into subdirectories of this directory.
-                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                foreach (string subdirectory in subdirectoryEntries)
-                    ProcessDirectory(subdirectory);
-            }
-        }
-
-        /// <summary>
-        /// Contains the logic behind processing a given file
-        /// </summary>
-        /// <param name="path"></param>
-        internal void ProcessFile(string path)
-        {
-            _logUtility.WriteLog($"Processing file {path}.");
-            if (_appSettings.EditWordDocuments)
-            {
-                if (path.Split('.')[1] == _appSettings.WordDocumentExtension)
-                {
-                    _logUtility.WriteLog($"Word document found: {path.Split('.')[0]}"); 
-                    _wordDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
-                }
-            }
-            if (_appSettings.EditExcelDocuments)
-            {
-                if (path.Split('.')[1] == _appSettings.ExcelDocumentExtension)
-                {
-                    _logUtility.WriteLog($"Excel document found: {path.Split('.')[0]}");
-                    _excelDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
-                }
-            }       
-
         }
 
         /// <summary>
@@ -79,7 +34,7 @@ namespace FolderInspector.Utilities
         /// </summary>
         /// <param name="filePath">Optionally, takes in the file path to append to the header text</param>
         /// <returns>Returns the header text content</returns>
-        internal string GetHeaderText(string filePath = "")
+        public string GetHeaderText(string filePath = "")
         {
             if(_appSettings.UseCustomHeaderText && !string.IsNullOrEmpty(_appSettings.CustomHeaderText))
             {
@@ -93,13 +48,21 @@ namespace FolderInspector.Utilities
         /// </summary>
         /// <param name="filePath">Optionally, takes in the file path to append to the footer text</param>
         /// <returns>Return the footer text content</returns>
-        internal string GetFooterText(string filePath = "")
+        public string GetFooterText(string filePath = "")
         {
             if (_appSettings.UseCustomHeaderText && !string.IsNullOrEmpty(_appSettings.CustomFooterText))
             {
                 return _appSettings.CustomFooterText + " " + (_appSettings.AppendFilePathToFooterText ? filePath: "");
             }
             return _appSettings.DefaultFooterText + " " + (_appSettings.AppendFilePathToFooterText ? filePath : "");
+        }
+
+
+        public void PrintHeader()
+        {
+            _logUtility.WriteLog($"Folder Inspector ({IntPtr.Size * 8}-bit .NET {Environment.Version})");
+            _logUtility.WriteLog($"Version {Assembly.GetEntryAssembly().GetName().Version}");
+            _logUtility.WriteLog("Copyright (C) 2019 Clyde D'Souza (https://clydedsouza.net).\n");
         }
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="Utilities\FolderUtility.cs" />
     <Compile Include="Utilities\IAppSettingsUtility.cs" />
     <Compile Include="Utilities\IDocumentUtility.cs" />
+    <Compile Include="Utilities\IFolderUtility.cs" />
     <Compile Include="Utilities\ILogUtility.cs" />
     <Compile Include="Utilities\WordUtility.cs" />
   </ItemGroup>
