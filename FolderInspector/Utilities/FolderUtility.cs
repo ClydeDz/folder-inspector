@@ -28,11 +28,7 @@ namespace FolderInspector.Utilities
             _appSettings = appSettings;
             _logUtility = logUtility;
         }
-
-        internal void Test()
-        {
-            Console.WriteLine(_appSettings.RootFileDirectory);
-        }
+         
         /// <summary>
         /// Process all files in the directory passed in, recurse on any directories 
         /// that are found, and process the files they contain.

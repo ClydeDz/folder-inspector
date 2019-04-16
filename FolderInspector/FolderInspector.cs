@@ -33,8 +33,8 @@ namespace FolderInspector
                 FolderUtility folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettings(config), new ConsoleLogUtility());
                  
 
-                string path = globalConfig.RootFileDirectory;
-                Console.WriteLine("a " +path);
+                string path = globalConfig.RootFileDirectory; 
+
                 if (File.Exists(path))
                 { 
                     folderUtility.ProcessFile(path);

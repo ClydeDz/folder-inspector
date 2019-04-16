@@ -32,26 +32,7 @@ namespace FolderInspector.Constants
     /// Contains the application wide settings
     /// </summary>
     public class AppSettings: IAppSettings
-    {
-
-        public AppSettings(string rootFileDirectory, string defaultHeaderText, string defaultFooterText, bool searchSubDirectories, bool editWordDocuments, bool editExcelDocuments, string wordDocumentExtension, string excelDocumentExtension, bool useCustomHeaderText, string customHeaderText, bool useCustomFooterText, string customFooterText, bool appendFilePathToHeaderText, bool appendFilePathToFooterText)
-        {
-            RootFileDirectory = rootFileDirectory;
-            DefaultHeaderText = defaultHeaderText;
-            DefaultFooterText = defaultFooterText;
-            SearchSubDirectories = searchSubDirectories;
-            EditWordDocuments = editWordDocuments;
-            EditExcelDocuments = editExcelDocuments;
-            WordDocumentExtension = wordDocumentExtension;
-            ExcelDocumentExtension = excelDocumentExtension;
-            UseCustomHeaderText = useCustomHeaderText;
-            CustomHeaderText = customHeaderText;
-            UseCustomFooterText = useCustomFooterText;
-            CustomFooterText = customFooterText;
-            AppendFilePathToHeaderText = appendFilePathToHeaderText;
-            AppendFilePathToFooterText = appendFilePathToFooterText;
-        }
-
+    { 
         public AppSettings(Configuration configuration)
         {
             RootFileDirectory = configuration.AppSettings.Settings["RootFileDirectory"].Value;
