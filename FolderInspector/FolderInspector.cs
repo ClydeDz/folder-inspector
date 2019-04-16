@@ -41,16 +41,21 @@ namespace FolderInspector
         internal void ProcessDirectory(string targetDirectory)
         {
             // Process the list of files found in the directory.
-            string[] fileEntries = Directory.GetFiles(targetDirectory);
+            _logUtility.WriteLog($"Processing: {targetDirectory}");
+            string[] fileEntries = Directory.GetFiles(targetDirectory);            
             foreach (string fileName in fileEntries)
+            { 
                 ProcessFile(fileName);
+            }                
 
             if (_appSettings.SearchSubDirectories)
             {
                 // Recurse into subdirectories of this directory.
                 string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
                 foreach (string subdirectory in subdirectoryEntries)
+                { 
                     ProcessDirectory(subdirectory);
+                }                    
             }
         }
 
@@ -60,12 +65,11 @@ namespace FolderInspector
         /// <param name="path"></param>
         internal void ProcessFile(string path)
         {
-            _logUtility.WriteLog($"Processing file {path}.");
             if (_appSettings.EditWordDocuments)
             {
                 if (_folderUtility.IsWordFile(path))
                 {
-                    _logUtility.WriteLog($"Word document found: {_folderUtility.GetFileName(path)}");
+                    _logUtility.WriteLog($"\tWord document found: {_folderUtility.GetFileName(path)}");
                     _wordDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
                 }
             }
@@ -73,11 +77,10 @@ namespace FolderInspector
             {
                 if (_folderUtility.IsExcelFile(path))
                 {
-                    _logUtility.WriteLog($"Excel document found: {_folderUtility.GetFileName(path)}");
+                    _logUtility.WriteLog($"\tExcel document found: {_folderUtility.GetFileName(path)}");
                     _excelDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
                 }
             }
-
         }
 
         internal static void Main(string[] args)
@@ -87,14 +90,11 @@ namespace FolderInspector
             IAppSettingsUtility _globalConfig;
 
             try
-            {
-                
-                
+            { 
                 var configMap = new ExeConfigurationFileMap();
                 configMap.ExeConfigFilename = args[0];
                 var config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
-
-
+                 
                 _globalConfig = new AppSettingsUtility(config);
                 _logUtility = new ConsoleLogUtility();
                 _folderUtility = new FolderUtility(new AppSettingsUtility(config), new ConsoleLogUtility());
@@ -116,9 +116,9 @@ namespace FolderInspector
                 {
                     _logUtility.WriteError($"{path} is not a valid file or directory.");
                 }
-                _logUtility.WriteLog("Program ended");
 
 #if DEBUG
+                _logUtility.WriteLog("\nProgram ended");
                 Console.Read();
 #endif
             }
