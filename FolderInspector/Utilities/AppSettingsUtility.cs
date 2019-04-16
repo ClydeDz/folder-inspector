@@ -1,39 +1,15 @@
-﻿/*
- * Author:  Clyde D'Souza
- * Project: Folder Inspector
- * Twitter: @ClydeDz
- * GitHub:  @ClydeDz 
- */
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FolderInspector.Constants
+namespace FolderInspector.Utilities
 {
-    public interface IAppSettings
+    class AppSettingsUtility: IAppSettingsUtility
     {
-        string RootFileDirectory { get; set; }
-        string DefaultHeaderText { get; set; }
-        string DefaultFooterText { get; set; }
-        bool SearchSubDirectories { get; set; }
-        bool EditWordDocuments { get; set; }
-        bool EditExcelDocuments { get; set; }
-        string WordDocumentExtension { get; set; }
-        string ExcelDocumentExtension { get; set; }
-        bool UseCustomHeaderText { get; set; }
-        string CustomHeaderText { get; set; }
-        bool UseCustomFooterText { get; set; }
-        string CustomFooterText { get; set; }
-        bool AppendFilePathToHeaderText { get; set; }
-        bool AppendFilePathToFooterText { get; set; }
-    }
-
-    /// <summary>
-    /// Contains the application wide settings
-    /// </summary>
-    public class AppSettings: IAppSettings
-    { 
-        public AppSettings(Configuration configuration)
+        public AppSettingsUtility(Configuration configuration)
         {
             RootFileDirectory = configuration.AppSettings.Settings["RootFileDirectory"].Value;
             DefaultHeaderText = configuration.AppSettings.Settings["DefaultHeaderText"].Value;

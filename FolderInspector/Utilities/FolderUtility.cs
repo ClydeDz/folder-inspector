@@ -5,9 +5,7 @@
  * GitHub:  @ClydeDz
  */
 
-using System;
 using System.IO;
-using FolderInspector.Constants;
 
 namespace FolderInspector.Utilities
 {
@@ -18,10 +16,10 @@ namespace FolderInspector.Utilities
     {
         private IDocumentUtility _wordDocumentUtility;
         private IDocumentUtility _excelDocumentUtility;
+        private IAppSettingsUtility _appSettings;
         private ILogUtility _logUtility;
-        private IAppSettings _appSettings;
 
-        public FolderUtility(IDocumentUtility wordDocumentUtility, IDocumentUtility excelDocumentUtility, IAppSettings appSettings, ILogUtility logUtility)
+        public FolderUtility(IDocumentUtility wordDocumentUtility, IDocumentUtility excelDocumentUtility, IAppSettingsUtility appSettings, ILogUtility logUtility)
         {
             _wordDocumentUtility = wordDocumentUtility;
             _excelDocumentUtility = excelDocumentUtility;

@@ -8,7 +8,6 @@
 using System;
 using System.Configuration;
 using System.IO;
-using FolderInspector.Constants;
 using FolderInspector.Utilities;
 
 namespace FolderInspector
@@ -29,8 +28,8 @@ namespace FolderInspector
                 var configMap = new ExeConfigurationFileMap();
                 configMap.ExeConfigFilename = args[0];
                 var config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
-                AppSettings globalConfig = new AppSettings(config); 
-                FolderUtility folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettings(config), new ConsoleLogUtility());
+                IAppSettingsUtility globalConfig = new AppSettingsUtility(config); 
+                FolderUtility folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config), new ConsoleLogUtility());
                  
 
                 string path = globalConfig.RootFileDirectory; 
