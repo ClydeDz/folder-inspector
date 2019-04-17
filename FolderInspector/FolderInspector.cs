@@ -11,10 +11,7 @@ using System.IO;
 using FolderInspector.Utilities;
 
 namespace FolderInspector
-{
-    /// <summary>
-    /// Starting point of the application
-    /// </summary>
+{ 
     internal class FolderInspector
     {
         private IDocumentUtility _wordDocumentUtility;
@@ -32,57 +29,11 @@ namespace FolderInspector
             _logUtility = logUtility;
             _folderUtility = folderUtility;
         }
-
+        
         /// <summary>
-        /// Process all files in the directory passed in, recurse on any directories 
-        /// that are found, and process the files they contain.
+        /// Applications entry point.
         /// </summary>
-        /// <param name="targetDirectory">Complete directory path</param>
-        internal void ProcessDirectory(string targetDirectory)
-        {
-            // Process the list of files found in the directory.
-            _logUtility.WriteLog($"Processing: {targetDirectory}");
-            string[] fileEntries = Directory.GetFiles(targetDirectory);            
-            foreach (string fileName in fileEntries)
-            { 
-                ProcessFile(fileName);
-            }                
-
-            if (_appSettings.SearchSubDirectories)
-            {
-                // Recurse into subdirectories of this directory.
-                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                foreach (string subdirectory in subdirectoryEntries)
-                { 
-                    ProcessDirectory(subdirectory);
-                }                    
-            }
-        }
-
-        /// <summary>
-        /// Contains the logic behind processing a given file
-        /// </summary>
-        /// <param name="path"></param>
-        internal void ProcessFile(string path)
-        {
-            if (_appSettings.EditWordDocuments)
-            {
-                if (_folderUtility.IsWordFile(path))
-                {
-                    _logUtility.WriteLog($"\tWord document found: {_folderUtility.GetFileName(path)}");
-                    _wordDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
-                }
-            }
-            if (_appSettings.EditExcelDocuments)
-            {
-                if (_folderUtility.IsExcelFile(path))
-                {
-                    _logUtility.WriteLog($"\tExcel document found: {_folderUtility.GetFileName(path)}");
-                    _excelDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
-                }
-            }
-        }
-
+        /// <param name="args">Optionally supply command line arguments</param>
         internal static void Main(string[] args)
         {
             ILogUtility _logUtility;
@@ -131,6 +82,56 @@ namespace FolderInspector
             finally
             {
                 Console.ResetColor();
+            }
+        }
+
+        /// <summary>
+        /// Process all files in the directory passed in, recurse on any directories 
+        /// that are found, and process the files they contain.
+        /// </summary>
+        /// <param name="targetDirectory">Complete directory path</param>
+        internal void ProcessDirectory(string targetDirectory)
+        {
+            // Process the list of files found in the directory.
+            _logUtility.WriteLog($"Processing: {targetDirectory}");
+            string[] fileEntries = Directory.GetFiles(targetDirectory);
+            foreach (string fileName in fileEntries)
+            {
+                ProcessFile(fileName);
+            }
+
+            if (_appSettings.SearchSubDirectories)
+            {
+                // Recurse into subdirectories of this directory.
+                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                foreach (string subdirectory in subdirectoryEntries)
+                {
+                    ProcessDirectory(subdirectory);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Contains the logic behind processing a given file
+        /// </summary>
+        /// <param name="path"></param>
+        internal void ProcessFile(string path)
+        {
+            if (_appSettings.EditWordDocuments)
+            {
+                if (_folderUtility.IsWordFile(path))
+                {
+                    _logUtility.WriteLog($"\tWord document found: {_folderUtility.GetFileName(path)}");
+                    _wordDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
+                }
+            }
+            if (_appSettings.EditExcelDocuments)
+            {
+                if (_folderUtility.IsExcelFile(path))
+                {
+                    _logUtility.WriteLog($"\tExcel document found: {_folderUtility.GetFileName(path)}");
+                    _excelDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
+                }
             }
         }
     }
