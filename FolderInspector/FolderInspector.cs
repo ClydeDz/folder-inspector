@@ -94,10 +94,10 @@ namespace FolderInspector
         {
             // Process the list of files found in the directory.
             _logUtility.WriteLog($"Processing: {targetDirectory}");
-            string[] fileEntries = Directory.GetFiles(targetDirectory);
-            foreach (string fileName in fileEntries)
+            string[] allFiles = Directory.GetFiles(targetDirectory);
+            foreach (string eachFile in allFiles)
             {
-                ProcessFile(fileName);
+                ProcessFile(eachFile);
             }
 
             if (_appSettings.SearchSubDirectories)
