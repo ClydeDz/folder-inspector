@@ -13,6 +13,8 @@ namespace FolderInspector.Utilities
         bool IsWordFile(string filePath);
         bool IsExcelFile(string filePath);
         string GetFileName(string filePath);
+        bool IsHelpCommand(string command);
+        bool IsConfigurationFileCommand(string command);
         void PrintHeader();
     }
 }

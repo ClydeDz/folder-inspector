@@ -5,6 +5,7 @@
  * GitHub:  @ClydeDz
  */
 
+using FolderInspector.Constants;
 using System;
 using System.IO;
 using System.Reflection;
@@ -20,6 +21,9 @@ namespace FolderInspector.Utilities
         //private IDocumentUtility _excelDocumentUtility;
         private IAppSettingsUtility _appSettings;
         private ILogUtility _logUtility;
+        public FolderUtility()
+        { 
+        }
 
         public FolderUtility(IAppSettingsUtility appSettings, ILogUtility logUtility)
         {
@@ -84,6 +88,29 @@ namespace FolderInspector.Utilities
             var parts = filePath.Split('\\');
             return parts[parts.Length-1];
         }
+
+        public bool IsHelpCommand(string command)
+        {
+            if (string.IsNullOrEmpty(command))
+            {
+                return false;
+            }
+
+            return command.ToLower().Trim() == AppConstants.CommandLineConstants.Help || command.ToLower().Trim() == AppConstants.CommandLineConstants.HelpShort;
+        }
+
+        public bool IsConfigurationFileCommand(string command)
+        {
+            if (string.IsNullOrEmpty(command))
+            {
+                return false;
+            }
+
+            return command.ToLower().Trim() == AppConstants.CommandLineConstants.ConfigurationFile || command.ToLower().Trim() == AppConstants.CommandLineConstants.ConfigurationFileShort;
+        }
+
+
+        //TODO: Move print header to new class
 
         public void PrintHeader()
         {

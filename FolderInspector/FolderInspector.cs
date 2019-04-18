@@ -8,6 +8,8 @@
 using System;
 using System.Configuration;
 using System.IO;
+using FolderInspector.Constants;
+using FolderInspector.Helper;
 using FolderInspector.Utilities;
 
 namespace FolderInspector
@@ -18,7 +20,7 @@ namespace FolderInspector
         private IDocumentUtility _excelDocumentUtility;
         private IAppSettingsUtility _appSettings;
         private ILogUtility _logUtility;
-        private IFolderUtility _folderUtility;
+        private IFolderUtility _folderUtility; 
 
         public FolderInspector(IDocumentUtility wordDocumentUtility, IDocumentUtility excelDocumentUtility, 
             IAppSettingsUtility appSettings, ILogUtility logUtility, IFolderUtility folderUtility)
@@ -37,16 +39,17 @@ namespace FolderInspector
         internal static void Main(string[] args)
         {
             ILogUtility _logUtility;
-            IFolderUtility _folderUtility;
-            IAppSettingsUtility _globalConfig;
+            IFolderUtility _folderUtility; 
 
             try
-            { 
+            {
+               
+                var settings = ProcessCommandLineArguments(args);
                 var configMap = new ExeConfigurationFileMap();
-                configMap.ExeConfigFilename = args[0];
+                configMap.ExeConfigFilename = settings.ConfigFilePath; // args[0];
                 var config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
-                 
-                _globalConfig = new AppSettingsUtility(config);
+                IAppSettingsUtility _globalConfig = new AppSettingsUtility(config);
+
                 _logUtility = new ConsoleLogUtility();
                 _folderUtility = new FolderUtility(new AppSettingsUtility(config), new ConsoleLogUtility());
                 FolderInspector folderInspector = new FolderInspector(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config), new ConsoleLogUtility(), _folderUtility);
@@ -77,7 +80,6 @@ namespace FolderInspector
             {
                 _logUtility = new ConsoleLogUtility();
                 _logUtility.WriteError($"Folder Inspection encountered an exception. Here are the details: {ex.Message}");
-                throw;
             }
             finally
             {
@@ -133,6 +135,29 @@ namespace FolderInspector
                     _excelDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
                 }
             }
+        }
+
+        internal static CommandLineSettings ProcessCommandLineArguments(string[] arguments)
+        {
+            var settings = new CommandLineSettings();
+            IFolderUtility _folderUtility = new FolderUtility();
+
+            for (var index = 0; index < arguments.Length; index++)
+            {
+                var currentArgument = arguments[index];
+
+                if (_folderUtility.IsHelpCommand(currentArgument))
+                {
+                    CommandLineHelper.PrintHelp();
+                }
+
+                if (_folderUtility.IsConfigurationFileCommand(currentArgument))
+                { 
+                    settings.ConfigFilePath = arguments[index+1];
+                }
+            }
+
+            return settings;
         }
     }
 }
