@@ -30,16 +30,15 @@ namespace FolderInspector
                 //Process command line arguments if any and set configuration settings
                 var settings = ProcessCommandLineArguments(args);
                 var config = SetApplicationConfiguration(settings);
+                if (settings.VanityCommandRequested)
+                {
+                    return;
+                }
 
                 //Initiate file processing
                 IFolderUtility _folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config));
                 _folderUtility.StartFileProcessing();
 
-
-#if DEBUG
-                CommandLineHelper.WriteLog("\nProgram ended");
-                Console.Read();
-#endif
             }
             catch (Exception ex)
             {
@@ -48,6 +47,10 @@ namespace FolderInspector
             finally
             {
                 Console.ResetColor();
+#if DEBUG
+                CommandLineHelper.WriteLog("\nProgram ended");
+                Console.Read();
+#endif
             }
         }
 
@@ -85,12 +88,14 @@ namespace FolderInspector
                 if (_folderUtility.IsHelpCommand(currentArgument))
                 {
                     CommandLineHelper.PrintHelp();
+                    settings.VanityCommandRequested = true;
                     return settings;
                 }
 
-                if (_folderUtility.IsHelpCommand(currentArgument))
+                if (_folderUtility.IsVersionCommand(currentArgument))
                 {
-                    CommandLineHelper.PrintHelp();
+                    CommandLineHelper.PrintVersion();
+                    settings.VanityCommandRequested = true;
                     return settings;
                 }
             }
@@ -102,7 +107,7 @@ namespace FolderInspector
 
                 if (_folderUtility.IsConfigCommand(currentArgument))
                 {
-                    settings.ConfigFilePath = _folderUtility.DoesArrayContentExists(arguments, index + 1) ? arguments[index + 1] : AppConstants.DefaultConfigFile;
+                    settings.ConfigFilePath = _folderUtility.DoesArrayContentExists(arguments, index + 1) ? arguments[index + 1] : null;
                     settings.ConfigSupplied = true;
                 }
             }

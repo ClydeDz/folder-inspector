@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -9,11 +10,6 @@ namespace FolderInspector.Helper
 {
     public class CommandLineHelper
     {
-        public static void PrintHelp()
-        {
-            Console.WriteLine("Help");
-        }
-
         public static void WriteLog(string message)
         {
             Console.ResetColor();
@@ -41,6 +37,21 @@ namespace FolderInspector.Helper
         public static void PrintVersion()
         { 
             Console.WriteLine($"Version {Assembly.GetEntryAssembly().GetName().Version}"); 
+        }
+
+        public static void PrintHelp()
+        {
+            string executableName = Path.GetFileNameWithoutExtension(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+            Console.WriteLine();
+            Console.WriteLine("Usage: {0} [options]", executableName);
+            Console.WriteLine("Example usage: {0} -h", executableName);
+            Console.WriteLine();
+            Console.WriteLine("Valid options  Alias   Explanation");
+            Console.WriteLine("-------------  -----   -----------");
+            Console.WriteLine("--config       -c      Supply the configuration file");
+            Console.WriteLine("--help         -h      Supply the configuration file");
+            Console.WriteLine("--version      -v      Gets the version");
+            Console.WriteLine();
         }
     }
 }
