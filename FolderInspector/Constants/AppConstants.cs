@@ -15,11 +15,5 @@
             public const string ConfigurationFile = "--config";
             public const string ConfigurationFileShort = "-c";
         }
-    }
-    public class CommandLineSettings
-    {
-        public bool VanityCommandRequested { get; set; }
-        public bool ConfigSupplied { get; set; }
-        public string ConfigFilePath { get; set; }
-    }
+    } 
 }

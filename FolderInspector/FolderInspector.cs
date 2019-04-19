@@ -9,6 +9,7 @@ using System;
 using System.Configuration;
 using FolderInspector.Constants;
 using FolderInspector.Helper;
+using FolderInspector.Model;
 using FolderInspector.Utilities;
 
 namespace FolderInspector
