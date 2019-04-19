@@ -9,7 +9,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetHeaderText_DefaultNoPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomHeaderText).Returns("");
@@ -17,7 +17,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultHeaderText).Returns("header text");
             appSettingsMock.Setup(_ => _.AppendFilePathToHeaderText).Returns(false);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetHeaderText("c:\\folder");
 
             Assert.Equal("header text", headerText);
@@ -26,7 +26,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetHeaderText_DefaultWithPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomHeaderText).Returns("");
@@ -34,7 +34,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultHeaderText).Returns("header text");
             appSettingsMock.Setup(_ => _.AppendFilePathToHeaderText).Returns(true);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetHeaderText("c:\\folder");
 
             Assert.Equal("header text c:\\folder", headerText);
@@ -43,7 +43,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetHeaderText_CustomNoPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomHeaderText).Returns("custom header text");
@@ -51,7 +51,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultHeaderText).Returns("header text");
             appSettingsMock.Setup(_ => _.AppendFilePathToHeaderText).Returns(false);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetHeaderText("c:\\folder");
 
             Assert.Equal("custom header text", headerText);
@@ -60,7 +60,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetHeaderText_CustomWithPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomHeaderText).Returns("custom header text");
@@ -68,7 +68,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultHeaderText).Returns("header text");
             appSettingsMock.Setup(_ => _.AppendFilePathToHeaderText).Returns(true);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetHeaderText("c:\\folder");
 
             Assert.Equal("custom header text c:\\folder", headerText);
@@ -81,7 +81,7 @@ namespace FolderInspector.Test.Utilities
         [InlineData(null, false, "header text")]
         public void GetHeaderText_CustomWithNullEmptyPath_Test(string customHeaderText, bool appendPath, string expected)
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomHeaderText).Returns(customHeaderText);
@@ -89,7 +89,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultHeaderText).Returns("header text");
             appSettingsMock.Setup(_ => _.AppendFilePathToHeaderText).Returns(appendPath);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetHeaderText("c:\\folder");
 
             Assert.Equal(expected, headerText);
@@ -98,7 +98,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetFooterText_DefaultNoPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomFooterText).Returns("");
@@ -106,7 +106,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultFooterText).Returns("footer text");
             appSettingsMock.Setup(_ => _.AppendFilePathToFooterText).Returns(false);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetFooterText("c:\\folder");
 
             Assert.Equal("footer text", headerText);
@@ -115,7 +115,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetFooterText_DefaultWithPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomFooterText).Returns("");
@@ -123,7 +123,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultFooterText).Returns("footer text");
             appSettingsMock.Setup(_ => _.AppendFilePathToFooterText).Returns(true);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetFooterText("c:\\folder");
 
             Assert.Equal("footer text c:\\folder", headerText);
@@ -132,7 +132,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetFooterText_CustomNoPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomFooterText).Returns("custom footer text");
@@ -140,7 +140,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultFooterText).Returns("footer text");
             appSettingsMock.Setup(_ => _.AppendFilePathToFooterText).Returns(false);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetFooterText("c:\\folder");
 
             Assert.Equal("custom footer text", headerText);
@@ -149,7 +149,7 @@ namespace FolderInspector.Test.Utilities
         [Fact]
         public void GetFooterText_CustomWithPath_Test()
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomFooterText).Returns("custom footer text");
@@ -157,7 +157,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultFooterText).Returns("footer text");
             appSettingsMock.Setup(_ => _.AppendFilePathToFooterText).Returns(true);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetFooterText("c:\\folder");
 
             Assert.Equal("custom footer text c:\\folder", headerText);
@@ -170,7 +170,7 @@ namespace FolderInspector.Test.Utilities
         [InlineData(null, false, "footer text")]
         public void GetFooterText_NullEmptyCustomWithOrWithoutPath_Test(string customFooterText, bool appendPath, string expected)
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.CustomFooterText).Returns(customFooterText);
@@ -178,7 +178,7 @@ namespace FolderInspector.Test.Utilities
             appSettingsMock.Setup(_ => _.DefaultFooterText).Returns("footer text");
             appSettingsMock.Setup(_ => _.AppendFilePathToFooterText).Returns(appendPath);
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var headerText = folderUtility.GetFooterText("c:\\folder");
 
             Assert.Equal(expected, headerText);
@@ -189,12 +189,12 @@ namespace FolderInspector.Test.Utilities
         [InlineData("c:\\folder\\another-folder\\sample.docx")]
         public void IsWordFile_ReturnsTrue_Test(string filePath)
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.WordDocumentExtension).Returns("docx");
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var isWordFile = folderUtility.IsWordFile(filePath);
 
             Assert.True(isWordFile);
@@ -206,12 +206,12 @@ namespace FolderInspector.Test.Utilities
         [InlineData("c:\\folder\\another-folder")]
         public void IsWordFile_ReturnsFalse_Test(string filePath)
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.WordDocumentExtension).Returns("docx");
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var isWordFile = folderUtility.IsWordFile(filePath);
 
             Assert.False(isWordFile);
@@ -222,12 +222,12 @@ namespace FolderInspector.Test.Utilities
         [InlineData("c:\\folder\\another-folder\\sample.xlsx")]
         public void IsExcelFile_ReturnsTrue_Test(string filePath)
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.ExcelDocumentExtension).Returns("xlsx");
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var isExcelFile = folderUtility.IsExcelFile(filePath);
 
             Assert.True(isExcelFile);
@@ -239,12 +239,12 @@ namespace FolderInspector.Test.Utilities
         [InlineData("c:\\folder\\another-folder")]
         public void IsExcelFile_ReturnsFalse_Test(string filePath)
         {
-            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            
             var documentUtilityMock = new Mock<IDocumentUtility>();
             var appSettingsMock = new Mock<IAppSettingsUtility>();
             appSettingsMock.Setup(_ => _.ExcelDocumentExtension).Returns("xlsx");
 
-            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var folderUtility = new FolderUtility(documentUtilityMock.Object, documentUtilityMock.Object, appSettingsMock.Object);
             var isExcelFile = folderUtility.IsExcelFile(filePath);
 
             Assert.False(isExcelFile);

@@ -32,7 +32,7 @@ namespace FolderInspector
                 var config = SetApplicationConfiguration(settings);
 
                 //Initiate file processing
-                IFolderUtility _folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config), new ConsoleLogUtility());
+                IFolderUtility _folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config));
                 _folderUtility.StartFileProcessing();
 
 

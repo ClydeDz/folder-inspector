@@ -18,6 +18,5 @@ namespace FolderInspector.Utilities
         bool IsVersionCommand(string command);
         bool IsConfigCommand(string command);
         bool DoesArrayContentExists(string[] array, int positionToCheck);
-        void PrintHeader();
     }
 }

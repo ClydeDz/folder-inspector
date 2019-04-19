@@ -76,13 +76,11 @@
     <Compile Include="Helper\CommandLineHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AppSettingsUtility.cs" />
-    <Compile Include="Utilities\ConsoleLogUtility.cs" />
     <Compile Include="Utilities\ExcelUtility.cs" />
     <Compile Include="Utilities\FolderUtility.cs" />
     <Compile Include="Utilities\IAppSettingsUtility.cs" />
     <Compile Include="Utilities\IDocumentUtility.cs" />
     <Compile Include="Utilities\IFolderUtility.cs" />
-    <Compile Include="Utilities\ILogUtility.cs" />
     <Compile Include="Utilities\WordUtility.cs" />
   </ItemGroup>
   <ItemGroup>

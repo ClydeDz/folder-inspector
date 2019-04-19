@@ -22,19 +22,17 @@ namespace FolderInspector.Utilities
         private IDocumentUtility _wordDocumentUtility;
         private IDocumentUtility _excelDocumentUtility;
         private IAppSettingsUtility _appSettings;
-        private ILogUtility _logUtility;
 
         public FolderUtility()
         { 
         }
 
         public FolderUtility(IDocumentUtility wordDocumentUtility, IDocumentUtility excelDocumentUtility, 
-            IAppSettingsUtility appSettings, ILogUtility logUtility)
+            IAppSettingsUtility appSettings)
         {
             _wordDocumentUtility = wordDocumentUtility;
             _excelDocumentUtility = excelDocumentUtility;
             _appSettings = appSettings;
-            _logUtility = logUtility;
         }
 
         public void StartFileProcessing()
@@ -204,16 +202,6 @@ namespace FolderInspector.Utilities
         public bool DoesArrayContentExists(string[] array, int positionToCheck)
         {
             return positionToCheck < array.Length ? !string.IsNullOrEmpty(array[positionToCheck]) : false;
-        }
-
-
-        //TODO: Move print header to new class
-
-        public void PrintHeader()
-        {
-            _logUtility.WriteLog($"Folder Inspector ({IntPtr.Size * 8}-bit .NET {Environment.Version})");
-            _logUtility.WriteLog($"Version {Assembly.GetEntryAssembly().GetName().Version}");
-            _logUtility.WriteLog("Copyright (C) 2019 Clyde D'Souza (https://clydedsouza.net).\n");
-        }
+        } 
     }
 }
