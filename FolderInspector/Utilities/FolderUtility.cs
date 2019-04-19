@@ -99,7 +99,17 @@ namespace FolderInspector.Utilities
             return command.ToLower().Trim() == AppConstants.CommandLineConstants.Help || command.ToLower().Trim() == AppConstants.CommandLineConstants.HelpShort;
         }
 
-        public bool IsConfigurationFileCommand(string command)
+        public bool IsVersionCommand(string command)
+        {
+            if (string.IsNullOrEmpty(command))
+            {
+                return false;
+            }
+
+            return command.ToLower().Trim() == AppConstants.CommandLineConstants.Version || command.ToLower().Trim() == AppConstants.CommandLineConstants.VersionShort;
+        }
+
+        public bool IsConfigCommand(string command)
         {
             if (string.IsNullOrEmpty(command))
             {
@@ -107,6 +117,11 @@ namespace FolderInspector.Utilities
             }
 
             return command.ToLower().Trim() == AppConstants.CommandLineConstants.ConfigurationFile || command.ToLower().Trim() == AppConstants.CommandLineConstants.ConfigurationFileShort;
+        }
+
+        public bool DoesArrayContentExists(string[] array, int positionToCheck)
+        {
+            return positionToCheck < array.Length ? !string.IsNullOrEmpty(array[positionToCheck]) : false;
         }
 
 

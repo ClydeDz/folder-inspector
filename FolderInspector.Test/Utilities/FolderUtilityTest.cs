@@ -255,5 +255,68 @@ namespace FolderInspector.Test.Utilities
 
             Assert.Equal(expected, fileName);
         }
+
+
+        [Theory]
+        [InlineData("--Version", true)]
+        [InlineData("-v", true)]
+        [InlineData("-V", true)]
+        [InlineData("--version", true)]
+        [InlineData("-version", false)]
+        [InlineData("--v", false)]
+        public void IsVersionCommand_Test(string input, bool expected)
+        {
+            var folderUtility = new FolderUtility();
+            var actual = folderUtility.IsVersionCommand(input);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("--Help", true)]
+        [InlineData("-h", true)]
+        [InlineData("-H", true)]
+        [InlineData("--help", true)]
+        [InlineData("-help", false)]
+        [InlineData("--h", false)]
+        public void IsHelpCommand_Test(string input, bool expected)
+        {
+            var folderUtility = new FolderUtility();
+            var actual = folderUtility.IsHelpCommand(input);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("--Config", true)]
+        [InlineData("-c", true)]
+        [InlineData("-C", true)]
+        [InlineData("--config", true)]
+        [InlineData("-config", false)]
+        [InlineData("--c", false)]
+        public void IsConfigCommand_Test(string input, bool expected)
+        {
+            var folderUtility = new FolderUtility();
+            var actual = folderUtility.IsConfigCommand(input);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(0, true, new string[] { "abc", "xyz", "", null, "" })]
+        [InlineData(2, false, new string[] { "abc", "xyz", "", null, "" })]
+        [InlineData(3, false, new string[] { "abc", "xyz", "", null, ""})]
+        [InlineData(6, false, new string[] { "abc", "xyz", "", null, "" })]
+        [InlineData(1, false, new string[] { "abc" })]
+        public void DoesArrayContentExists_Test(int position, bool expected, string[] testArray)
+        {
+            var consoleLogUtilityMock = new Mock<ILogUtility>();
+            var appSettingsMock = new Mock<IAppSettingsUtility>();
+
+            var folderUtility = new FolderUtility(appSettingsMock.Object, consoleLogUtilityMock.Object);
+            var actual = folderUtility.DoesArrayContentExists(testArray, position);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
