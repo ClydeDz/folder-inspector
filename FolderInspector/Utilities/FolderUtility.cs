@@ -6,9 +6,11 @@
  */
 
 using FolderInspector.Constants;
+using FolderInspector.Helper;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Security;
 
 namespace FolderInspector.Utilities
 {
@@ -17,21 +19,101 @@ namespace FolderInspector.Utilities
     /// </summary>
     public class FolderUtility: IFolderUtility
     {
-        //private IDocumentUtility _wordDocumentUtility;
-        //private IDocumentUtility _excelDocumentUtility;
+        private IDocumentUtility _wordDocumentUtility;
+        private IDocumentUtility _excelDocumentUtility;
         private IAppSettingsUtility _appSettings;
         private ILogUtility _logUtility;
+
         public FolderUtility()
         { 
         }
 
-        public FolderUtility(IAppSettingsUtility appSettings, ILogUtility logUtility)
+        public FolderUtility(IDocumentUtility wordDocumentUtility, IDocumentUtility excelDocumentUtility, 
+            IAppSettingsUtility appSettings, ILogUtility logUtility)
         {
-            //_wordDocumentUtility = wordDocumentUtility;
-            //_excelDocumentUtility = excelDocumentUtility;
+            _wordDocumentUtility = wordDocumentUtility;
+            _excelDocumentUtility = excelDocumentUtility;
             _appSettings = appSettings;
             _logUtility = logUtility;
         }
+
+        public void StartFileProcessing()
+        {
+            try
+            {
+                string path = _appSettings.RootFileDirectory;
+
+                if (File.Exists(path))
+                {
+                    ProcessFile(path);
+                    return;
+                }
+
+                if (Directory.Exists(path))
+                {
+                    ProcessDirectory(path);
+                    return;
+                }
+
+                throw new FileNotFoundException($"{path} is not a valid file or directory.");
+            }
+            catch(SecurityException secEx)
+            {
+                throw secEx;
+            } 
+        }
+
+
+        /// <summary>
+        /// Process all files in the directory passed in, recurse on any directories 
+        /// that are found, and process the files they contain.
+        /// </summary>
+        /// <param name="targetDirectory">Complete directory path</param>
+        internal void ProcessDirectory(string targetDirectory)
+        {
+            // Process the list of files found in the directory.
+            CommandLineHelper.WriteLog($"Processing: {targetDirectory}");
+            string[] allFiles = Directory.GetFiles(targetDirectory);
+            foreach (string eachFile in allFiles)
+            {
+                ProcessFile(eachFile);
+            }
+
+            if (_appSettings.SearchSubDirectories)
+            {
+                // Recurse into subdirectories of this directory.
+                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                foreach (string subdirectory in subdirectoryEntries)
+                {
+                    ProcessDirectory(subdirectory);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Contains the logic behind processing a given file
+        /// </summary>
+        /// <param name="path"></param>
+        internal void ProcessFile(string path)
+        {
+            if (_appSettings.EditWordDocuments)
+            {
+                if (IsWordFile(path))
+                {
+                    CommandLineHelper.WriteLog($"\tWord document found: {GetFileName(path)}");
+                    _wordDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
+                }
+            }
+            if (_appSettings.EditExcelDocuments)
+            {
+                if (IsExcelFile(path))
+                {
+                    CommandLineHelper.WriteLog($"\tExcel document found: {GetFileName(path)}");
+                    _excelDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
+                }
+            }
+        }
+
 
         /// <summary>
         /// Computes a header text

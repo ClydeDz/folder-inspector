@@ -13,73 +13,28 @@ using FolderInspector.Helper;
 using FolderInspector.Utilities;
 
 namespace FolderInspector
-{ 
+{
     internal class FolderInspector
     {
-        private IDocumentUtility _wordDocumentUtility;
-        private IDocumentUtility _excelDocumentUtility;
-        private IAppSettingsUtility _appSettings;
-        private IFolderUtility _folderUtility; 
-
-        public FolderInspector(IDocumentUtility wordDocumentUtility, IDocumentUtility excelDocumentUtility, 
-            IAppSettingsUtility appSettings,IFolderUtility folderUtility)
-        {
-            _wordDocumentUtility = wordDocumentUtility;
-            _excelDocumentUtility = excelDocumentUtility;
-            _appSettings = appSettings;
-            _folderUtility = folderUtility;
-        }
-        
         /// <summary>
         /// Applications entry point.
         /// </summary>
         /// <param name="args">Optionally supply command line arguments</param>
         internal static void Main(string[] args)
         {
-            IFolderUtility _folderUtility; 
-
             try
             {
+                //Print mandatory application meta information on console
                 CommandLineHelper.PrintHeader();
 
+                //Process command line arguments if any and set configuration settings
                 var settings = ProcessCommandLineArguments(args);
+                var config = SetApplicationConfiguration(settings);
 
-                //Set applications configuration file
-                if (settings.ConfigSupplied && string.IsNullOrEmpty(settings.ConfigFilePath)) {
-                    throw new ConfigurationErrorsException("Please supply a configuration file");
-                }
-                var configMap = new ExeConfigurationFileMap();
-                Configuration config;
-                IAppSettingsUtility _globalConfig;
-                try
-                {
-                    configMap.ExeConfigFilename = string.IsNullOrEmpty(settings.ConfigFilePath) ? AppConstants.DefaultConfigFile : settings.ConfigFilePath;
-                    config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
-                    _globalConfig = new AppSettingsUtility(config);
-                }
-                catch
-                {
-                    throw new ConfigurationErrorsException("Invalid or no configuration file");
-                }
+                //Initiate file processing
+                IFolderUtility _folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config), new ConsoleLogUtility());
+                _folderUtility.StartFileProcessing();
 
-                _folderUtility = new FolderUtility(new AppSettingsUtility(config), new ConsoleLogUtility());
-                FolderInspector folderInspector = new FolderInspector(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config), _folderUtility);
-                              
-
-                string path = _globalConfig.RootFileDirectory; 
-
-                if (File.Exists(path))
-                {
-                    folderInspector.ProcessFile(path);
-                }
-                else if (Directory.Exists(path))
-                {
-                    folderInspector.ProcessDirectory(path);
-                }
-                else
-                {
-                    CommandLineHelper.WriteError($"{path} is not a valid file or directory.");
-                }
 
 #if DEBUG
                 CommandLineHelper.WriteLog("\nProgram ended");
@@ -96,58 +51,28 @@ namespace FolderInspector
             }
         }
 
-
-        /// <summary>
-        /// Process all files in the directory passed in, recurse on any directories 
-        /// that are found, and process the files they contain.
-        /// </summary>
-        /// <param name="targetDirectory">Complete directory path</param>
-        internal void ProcessDirectory(string targetDirectory)
-        {
-            // Process the list of files found in the directory.
-            CommandLineHelper.WriteLog($"Processing: {targetDirectory}");
-            string[] allFiles = Directory.GetFiles(targetDirectory);
-            foreach (string eachFile in allFiles)
+        static Configuration SetApplicationConfiguration(CommandLineSettings settings)
+        { 
+            if (settings.ConfigSupplied && string.IsNullOrEmpty(settings.ConfigFilePath))
             {
-                ProcessFile(eachFile);
+                throw new ConfigurationErrorsException("Please supply a configuration file");
             }
 
-            if (_appSettings.SearchSubDirectories)
+            try
             {
-                // Recurse into subdirectories of this directory.
-                string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-                foreach (string subdirectory in subdirectoryEntries)
+                var configMap = new ExeConfigurationFileMap
                 {
-                    ProcessDirectory(subdirectory);
-                }
+                    ExeConfigFilename = string.IsNullOrEmpty(settings.ConfigFilePath) ? AppConstants.DefaultConfigFile : settings.ConfigFilePath
+                };
+                return ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
+            }
+            catch
+            {
+                throw new ConfigurationErrorsException("Invalid or no configuration file");
             }
         }
 
-        /// <summary>
-        /// Contains the logic behind processing a given file
-        /// </summary>
-        /// <param name="path"></param>
-        internal void ProcessFile(string path)
-        {
-            if (_appSettings.EditWordDocuments)
-            {
-                if (_folderUtility.IsWordFile(path))
-                {
-                    CommandLineHelper.WriteLog($"\tWord document found: {_folderUtility.GetFileName(path)}");
-                    _wordDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
-                }
-            }
-            if (_appSettings.EditExcelDocuments)
-            {
-                if (_folderUtility.IsExcelFile(path))
-                {
-                    CommandLineHelper.WriteLog($"\tExcel document found: {_folderUtility.GetFileName(path)}");
-                    _excelDocumentUtility.UpdateHeaderFooter(path, _folderUtility.GetHeaderText(path), _folderUtility.GetFooterText(path));
-                }
-            }
-        }
-
-        internal static CommandLineSettings ProcessCommandLineArguments(string[] arguments)
+        static CommandLineSettings ProcessCommandLineArguments(string[] arguments)
         {
             var settings = new CommandLineSettings();
             IFolderUtility _folderUtility = new FolderUtility();
@@ -177,7 +102,7 @@ namespace FolderInspector
 
                 if (_folderUtility.IsConfigCommand(currentArgument))
                 {
-                    settings.ConfigFilePath = _folderUtility.DoesArrayContentExists(arguments, index+1) ? arguments[index + 1]: AppConstants.DefaultConfigFile;
+                    settings.ConfigFilePath = _folderUtility.DoesArrayContentExists(arguments, index + 1) ? arguments[index + 1] : AppConstants.DefaultConfigFile;
                     settings.ConfigSupplied = true;
                 }
             }
