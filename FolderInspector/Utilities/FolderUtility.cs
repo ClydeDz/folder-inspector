@@ -7,9 +7,7 @@
 
 using FolderInspector.Constants;
 using FolderInspector.Helper;
-using System;
 using System.IO;
-using System.Reflection;
 using System.Security;
 
 namespace FolderInspector.Utilities
@@ -35,6 +33,9 @@ namespace FolderInspector.Utilities
             _appSettings = appSettings;
         }
 
+        /// <summary>
+        /// Initiates file or directory processing.
+        /// </summary>
         public void StartFileProcessing()
         {
             try
@@ -145,6 +146,11 @@ namespace FolderInspector.Utilities
             return $"{_appSettings.DefaultFooterText}{footerText}";
         }
 
+        /// <summary>
+        /// Confirms if the supplied file is a Word file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public bool IsWordFile(string filePath)
         {
             if (!filePath.Contains("."))
@@ -154,6 +160,11 @@ namespace FolderInspector.Utilities
             return filePath.Split('.')[1] == _appSettings.WordDocumentExtension;
         }
 
+        /// <summary>
+        /// Confirms if the supplied file is an Excel file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public bool IsExcelFile(string filePath)
         {
             if (!filePath.Contains("."))
@@ -163,12 +174,22 @@ namespace FolderInspector.Utilities
             return filePath.Split('.')[1] == _appSettings.ExcelDocumentExtension;
         }
 
+        /// <summary>
+        /// Gets the file name from the supplied path.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public string GetFileName(string filePath)
         {
             var parts = filePath.Split('\\');
             return parts[parts.Length-1];
         }
 
+        /// <summary>
+        /// Confirms if the supplied command is help .
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public bool IsHelpCommand(string command)
         {
             if (string.IsNullOrEmpty(command))
@@ -179,6 +200,11 @@ namespace FolderInspector.Utilities
             return command.ToLower().Trim() == AppConstants.CommandLineConstants.Help || command.ToLower().Trim() == AppConstants.CommandLineConstants.HelpShort;
         }
 
+        /// <summary>
+        /// Confirms if the supplied command is vesion. 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public bool IsVersionCommand(string command)
         {
             if (string.IsNullOrEmpty(command))
@@ -189,6 +215,11 @@ namespace FolderInspector.Utilities
             return command.ToLower().Trim() == AppConstants.CommandLineConstants.Version || command.ToLower().Trim() == AppConstants.CommandLineConstants.VersionShort;
         }
 
+        /// <summary>
+        /// Confirms if the supplied command is config.
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public bool IsConfigCommand(string command)
         {
             if (string.IsNullOrEmpty(command))
@@ -199,6 +230,12 @@ namespace FolderInspector.Utilities
             return command.ToLower().Trim() == AppConstants.CommandLineConstants.ConfigurationFile || command.ToLower().Trim() == AppConstants.CommandLineConstants.ConfigurationFileShort;
         }
 
+        /// <summary>
+        /// Confiirms if content exists in a particular position of the supplied array.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="positionToCheck"></param>
+        /// <returns></returns>
         public bool DoesArrayContentExists(string[] array, int positionToCheck)
         {
             return positionToCheck < array.Length ? !string.IsNullOrEmpty(array[positionToCheck]) : false;

@@ -7,7 +7,6 @@
 
 using System;
 using System.Configuration;
-using System.IO;
 using FolderInspector.Constants;
 using FolderInspector.Helper;
 using FolderInspector.Utilities;
@@ -25,7 +24,7 @@ namespace FolderInspector
             try
             {
                 //Print mandatory application meta information on console
-                CommandLineHelper.PrintHeader();
+                CommandLineHelper.PrintCopyright();
 
                 //Process command line arguments if any and set configuration settings
                 var settings = ProcessCommandLineArguments(args);
@@ -54,6 +53,11 @@ namespace FolderInspector
             }
         }
 
+        /// <summary>
+        /// Sets application settings with the help of a configuration file supplied.
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
         static Configuration SetApplicationConfiguration(CommandLineSettings settings)
         { 
             if (settings.ConfigSupplied && string.IsNullOrEmpty(settings.ConfigFilePath))
@@ -75,6 +79,11 @@ namespace FolderInspector
             }
         }
 
+        /// <summary>
+        /// Reads and processes the command line arguments passed to this application.
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         static CommandLineSettings ProcessCommandLineArguments(string[] arguments)
         {
             var settings = new CommandLineSettings();
