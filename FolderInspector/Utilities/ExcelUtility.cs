@@ -1,11 +1,4 @@
-﻿/*
- * Author:  Clyde D'Souza
- * Project: Folder Inspector
- * Twitter: @ClydeDz
- * GitHub:  @ClydeDz 
- */
-
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 
 namespace FolderInspector.Utilities
 {

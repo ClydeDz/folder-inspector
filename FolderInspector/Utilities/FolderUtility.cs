@@ -1,11 +1,4 @@
-﻿/*
- * Author:  Clyde D'Souza
- * Project: Folder Inspector
- * Twitter: @ClydeDz
- * GitHub:  @ClydeDz
- */
-
-using FolderInspector.Constants;
+﻿using FolderInspector.Constants;
 using FolderInspector.Helper;
 using System.IO;
 using System.Security;
