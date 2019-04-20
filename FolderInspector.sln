@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderInspector", "FolderIn
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{273361C1-2D46-4177-A9C3-6BBD89BE372F}"
 	ProjectSection(SolutionItems) = preProject
+		folderinspector-icon.jpg = folderinspector-icon.jpg
 		FolderInspector.nuspec = FolderInspector.nuspec
 		License.md = License.md
 		README.md = README.md
