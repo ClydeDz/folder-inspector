@@ -1,5 +1,6 @@
 ﻿using FolderInspector.Constants;
 using FolderInspector.Helper;
+using System;
 using System.IO;
 using System.Security;
 
@@ -68,7 +69,14 @@ namespace FolderInspector.Utilities
             string[] allFiles = Directory.GetFiles(targetDirectory);
             foreach (string eachFile in allFiles)
             {
-                ProcessFile(eachFile);
+                try
+                {
+                    ProcessFile(eachFile);
+                }
+                catch(Exception ex)
+                {
+                    CommandLineHelper.WriteError($"Error while processing {eachFile}: {ex.Message}");
+                }                
             }
 
             if (_appSettings.SearchSubDirectories)
@@ -88,21 +96,31 @@ namespace FolderInspector.Utilities
         /// <param name="path"></param>
         internal void ProcessFile(string path)
         {
+            var fileName = GetFileName(path);
+            if (IsTemporaryFile(fileName))
+            {
+                return;
+            }
+
             if (_appSettings.EditWordDocuments)
             {
-                if (IsWordFile(path))
+                if (!IsWordFile(path))
                 {
-                    CommandLineHelper.WriteLog($"\tWord document found: {GetFileName(path)}");
-                    _wordDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
+                    return;    
                 }
+
+                CommandLineHelper.WriteLog($"\tWord document found: {fileName}");
+                _wordDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
             }
             if (_appSettings.EditExcelDocuments)
             {
-                if (IsExcelFile(path))
+                if (!IsExcelFile(path))
                 {
-                    CommandLineHelper.WriteLog($"\tExcel document found: {GetFileName(path)}");
-                    _excelDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
-                }
+                    return;   
+                }              
+
+                CommandLineHelper.WriteLog($"\tExcel document found: {fileName}");
+                _excelDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
             }
         }
 
@@ -176,6 +194,11 @@ namespace FolderInspector.Utilities
         {
             var parts = filePath.Split('\\');
             return parts[parts.Length-1];
+        }
+
+        public bool IsTemporaryFile(string fileName)
+        {
+            return fileName.StartsWith("~$");
         }
 
         /// <summary>

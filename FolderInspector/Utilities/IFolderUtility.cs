@@ -8,6 +8,7 @@
         bool IsWordFile(string filePath);
         bool IsExcelFile(string filePath);
         string GetFileName(string filePath);
+        bool IsTemporaryFile(string fileName);
         bool IsHelpCommand(string command);
         bool IsVersionCommand(string command);
         bool IsConfigCommand(string command);

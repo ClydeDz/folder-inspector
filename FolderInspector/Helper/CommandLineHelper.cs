@@ -36,6 +36,7 @@ namespace FolderInspector.Helper
             Console.WriteLine($"Folder Inspector ({IntPtr.Size * 8}-bit .NET {Environment.Version})");
             Console.WriteLine($"Version {Assembly.GetEntryAssembly().GetName().Version}");
             Console.WriteLine("Copyright (C) 2019 Clyde D'Souza (https://clydedsouza.net).");
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -52,7 +53,6 @@ namespace FolderInspector.Helper
         public static void PrintHelp()
         {
             string executableName = Path.GetFileNameWithoutExtension(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-            Console.WriteLine();
             Console.WriteLine($"Usage: {executableName} [options]");
             Console.WriteLine($"Example usage: {executableName} -h");
             Console.WriteLine();

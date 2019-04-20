@@ -7,6 +7,7 @@
 
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using FolderInspector.Constants;
 using FolderInspector.Helper;
 using FolderInspector.Model;
@@ -22,8 +23,12 @@ namespace FolderInspector
         /// <param name="args">Optionally supply command line arguments</param>
         internal static void Main(string[] args)
         {
+            var stopwatch = new Stopwatch();
+
             try
-            {
+            { 
+                stopwatch.Start();
+
                 //Print mandatory application meta information on console
                 CommandLineHelper.PrintCopyright();
 
@@ -31,7 +36,7 @@ namespace FolderInspector
                 var settings = ProcessCommandLineArguments(args);
                 var config = SetApplicationConfiguration(settings);
                 if (settings.VanityCommandRequested)
-                {
+                { 
                     return;
                 }
 
@@ -39,6 +44,10 @@ namespace FolderInspector
                 IFolderUtility _folderUtility = new FolderUtility(new WordUtility(), new ExcelUtility(), new AppSettingsUtility(config));
                 _folderUtility.StartFileProcessing();
 
+                //Print diagnostics of the process
+                stopwatch.Stop(); 
+                Console.WriteLine();
+                CommandLineHelper.WriteLog($"Completed in {stopwatch.ElapsedMilliseconds}ms");
             }
             catch (Exception ex)
             {
@@ -47,6 +56,7 @@ namespace FolderInspector
             finally
             {
                 Console.ResetColor();
+                stopwatch.Reset();
 #if DEBUG
                 CommandLineHelper.WriteLog("\nProgram ended");
                 Console.Read();

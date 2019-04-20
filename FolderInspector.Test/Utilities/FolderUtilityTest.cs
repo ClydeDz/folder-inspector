@@ -267,6 +267,20 @@ namespace FolderInspector.Test.Utilities
             Assert.Equal(expected, fileName);
         }
 
+        [Theory]
+        [InlineData("~$three.docx", true)]
+        [InlineData("~$three.xlsx", true)]
+        [InlineData("some~$random.docx", false)]
+        [InlineData("sample.docx", false)]
+        [InlineData("test.xlsx", false)]
+        public void IsTemporaryFile_Test(string fileName, bool expected)
+        {
+            var folderUtility = new FolderUtility();
+            var actual = folderUtility.IsTemporaryFile(fileName);
+
+            Assert.Equal(expected, actual);
+        }
+
 
         [Theory]
         [InlineData("--Version", true)]
