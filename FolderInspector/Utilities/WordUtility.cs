@@ -13,17 +13,13 @@ namespace FolderInspector.Utilities
         /// <param name="filePath">Complete file path</param>
         public void UpdateHeaderFooter(string filePath, string headerText, string footerText)
         {
-            DocX document = DocX.Load(filePath);            
-            document.AddHeaders();
-            document.AddFooters();
-            
-            Header header_default = document.Headers.odd;
-            Paragraph p1 = header_default.InsertParagraph();
-            p1.InsertText(headerText);
+            DocX document = DocX.Load(filePath);
 
-            Footer footer_default = document.Footers.odd;
-            Paragraph p3 = footer_default.InsertParagraph();
-            p3.InsertText(footerText);
+            document.AddHeaders(); 
+            document.Headers.odd.InsertParagraph(headerText);
+
+            document.AddFooters();
+            document.Footers.odd.InsertParagraph(footerText);   
             
             document.Save();
         }
