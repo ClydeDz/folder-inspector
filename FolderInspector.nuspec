@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>FolderInspector</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <title>Folder Inspector</title>
     <authors>Clyde D'Souza</authors>
     <owners>clydedsouza</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <projectUrl>https://github.com/ClydeDz/folder-inspector</projectUrl>
-    <iconUrl>https://via.placeholder.com/64.png</iconUrl>
+    <projectUrl>https://github.com/ClydeDz/folder-inspector/wiki</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/ClydeDz/folder-inspector/master/folderinspector-icon.png</iconUrl>
     <repository url="https://github.com/ClydeDz/folder-inspector" />
     <description>Folder Inspector is a command line utility that helps bulk update the headers and footers of Word and Excel files.</description>
     <summary>Folder Inspector is a command line utility that helps bulk update the headers and footers of Word and Excel files.</summary>
-    <releaseNotes>https://github.com/ClydeDz/folder-inspector/wiki#release-notes</releaseNotes>
+    <releaseNotes>Read detailed release notes here: https://github.com/ClydeDz/folder-inspector/wiki#release-notes</releaseNotes>
     <language>en-US</language>
     <copyright>Copyright (c) 2019 Clyde D'Souza</copyright>
-    <tags>folder-inspector exe word excel bulk-update console tools utility</tags>
+    <tags>folder-inspector exe word excel bulk-update console tools utility experimental docx doc xls xlsx document office</tags>
   </metadata>
 </package>
