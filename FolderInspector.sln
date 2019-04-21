@@ -1,15 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderInspector", "FolderInspector\FolderInspector.csproj", "{F5A4775C-F887-48E3-BC34-C628E5A34715}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{273361C1-2D46-4177-A9C3-6BBD89BE372F}"
 	ProjectSection(SolutionItems) = preProject
+		folderinspector-icon.png = folderinspector-icon.png
+		FolderInspector.nuspec = FolderInspector.nuspec
 		License.md = License.md
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FolderInspector.Test", "FolderInspector.Test\FolderInspector.Test.csproj", "{174EF226-3379-43BF-9BF1-DBC28C47DD6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,10 @@ Global
 		{F5A4775C-F887-48E3-BC34-C628E5A34715}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5A4775C-F887-48E3-BC34-C628E5A34715}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5A4775C-F887-48E3-BC34-C628E5A34715}.Release|Any CPU.Build.0 = Release|Any CPU
+		{174EF226-3379-43BF-9BF1-DBC28C47DD6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{174EF226-3379-43BF-9BF1-DBC28C47DD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{174EF226-3379-43BF-9BF1-DBC28C47DD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{174EF226-3379-43BF-9BF1-DBC28C47DD6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

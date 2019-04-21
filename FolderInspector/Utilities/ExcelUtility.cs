@@ -1,30 +1,23 @@
-﻿/*
- * Author: Clyde D'Souza
- * Project: Folder Inspector
- * Twitter: @ClydeDz
- * GitHub: @ClydeDz 
- */
+﻿using ClosedXML.Excel;
 
-using ClosedXML.Excel;
-
-namespace FolderInspector.Services
+namespace FolderInspector.Utilities
 {
     /// <summary>
     /// Contains methods to edit an Excel file
     /// </summary>
-    public class ExcelService
+    internal class ExcelUtility: IDocumentUtility
     {
         /// <summary>
         /// Edits the header and footer of the Excel file at the specified path.
         /// </summary>
         /// <param name="filePath">Complete file path</param>
-        public static void EditExcelHeaderFooter(string filePath)
+        public void UpdateHeaderFooter(string filePath, string headerText, string footerText)
         {
             var workbook = new XLWorkbook(filePath);
             var worksheet = workbook.Worksheets.Worksheet(1);
 
-            worksheet.PageSetup.Header.Left.AddText(FolderService.GetHeaderText(filePath));
-            worksheet.PageSetup.Footer.Left.AddText(FolderService.GetFooterText(filePath));
+            worksheet.PageSetup.Header.Left.AddText(headerText);
+            worksheet.PageSetup.Footer.Left.AddText(footerText);
 
             workbook.SaveAs(filePath);
         }
