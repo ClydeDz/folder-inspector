@@ -57,7 +57,7 @@ namespace FolderInspector.Helper
             Console.WriteLine($"Example usage: {executableName} -h");
             Console.WriteLine();
             Console.WriteLine("Valid commands  Alias   Args                 Explanation");
-            Console.WriteLine("--------------  -----   ----                 -----------");
+            Console.WriteLine("--------------  -----   -----------------    -----------");
             Console.WriteLine("--config        -c      .config file name    Supply a custom configuration file");
             Console.WriteLine("--help          -h                           Displays the help screen");
             Console.WriteLine("--version       -v                           Gets the application version"); 
