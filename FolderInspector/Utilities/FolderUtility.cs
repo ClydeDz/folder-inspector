@@ -97,28 +97,20 @@ namespace FolderInspector.Utilities
         internal void ProcessFile(string path)
         {
             var fileName = GetFileName(path);
+
             if (IsTemporaryFile(fileName))
-            {
+            { 
                 return;
-            }
+            } 
 
-            if (_appSettings.EditWordDocuments)
+            if (_appSettings.EditWordDocuments && IsWordFile(path))
             {
-                if (!IsWordFile(path))
-                {
-                    return;    
-                }
-
                 CommandLineHelper.WriteLog($"\tWord document found: {fileName}");
                 _wordDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
-            }
-            if (_appSettings.EditExcelDocuments)
-            {
-                if (!IsExcelFile(path))
-                {
-                    return;   
-                }              
+            } 
 
+            if (_appSettings.EditExcelDocuments && IsExcelFile(path))
+            {         
                 CommandLineHelper.WriteLog($"\tExcel document found: {fileName}");
                 _excelDocumentUtility.UpdateHeaderFooter(path, GetHeaderText(path), GetFooterText(path));
             }
