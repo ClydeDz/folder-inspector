@@ -53,14 +53,14 @@ namespace FolderInspector.Helper
         public static void PrintHelp()
         {
             string executableName = Path.GetFileNameWithoutExtension(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-            Console.WriteLine($"Usage: {executableName} [options]");
+            Console.WriteLine($"Usage: {executableName} [command] [args]");
             Console.WriteLine($"Example usage: {executableName} -h");
             Console.WriteLine();
-            Console.WriteLine("Valid options  Alias   Explanation");
-            Console.WriteLine("-------------  -----   -----------");
-            Console.WriteLine("--config       -c      Supply the configuration file");
-            Console.WriteLine("--help         -h      Supply the configuration file");
-            Console.WriteLine("--version      -v      Gets the version"); 
+            Console.WriteLine("Valid commands  Alias   Args                 Explanation");
+            Console.WriteLine("--------------  -----   -----------------    -----------");
+            Console.WriteLine("--config        -c      .config file name    Supply a custom configuration file");
+            Console.WriteLine("--help          -h                           Displays the help screen");
+            Console.WriteLine("--version       -v                           Gets the application version"); 
         }
     }
 }
