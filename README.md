@@ -16,7 +16,13 @@ Command to install FolderInspector NuGet via the Package Manager Console UI in V
 ```PowerShell
 PM> Install-Package FolderInspector 
 ```
-  
+
+### Usage
+The above installs a command line utility in the `packages` folder. The command line application can be executed via the command prompt 
+to update the headers and footers of Word and/or Excel files.  
+
+More usage details [here](https://github.com/ClydeDz/folder-inspector/wiki#usage).   
+
 
 ## Release notes
 Find detailed release notes [here](https://github.com/ClydeDz/folder-inspector/wiki#release-notes).
